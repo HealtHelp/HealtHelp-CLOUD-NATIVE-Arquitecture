@@ -2,8 +2,6 @@ package com.healthelp.billing.service.impl;
 
 import com.healthelp.billing.dao.BillingDao;
 import com.healthelp.billing.model.dto.BillingDTO;
-
-import com.healthelp.billing.model.entity.Billing;
 import com.healthelp.billing.model.map.BillingMapper;
 import com.healthelp.billing.service.BillingService;
 import org.springframework.core.convert.converter.Converter;
