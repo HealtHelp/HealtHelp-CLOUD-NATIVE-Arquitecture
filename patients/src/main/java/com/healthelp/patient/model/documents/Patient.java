@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Patient{
     @Id
     private String id;
-    private UUID tenantId;
+    private Integer tenantId;
     private String name;
     private String lastName;
     private String dni;
@@ -21,10 +21,10 @@ public class Patient{
     private String location;
     private String profession;
     private String email;
-    private UUID userId;
+    private Integer userId;
 
 
-    public Patient(UUID tenantId, String name,String lastName, String dni, String telephone, String address, String location, String profession, String email, UUID userId) {
+    public Patient(Integer tenantId, String name,String lastName, String dni, String telephone, String address, String location, String profession, String email, Integer userId) {
         this.tenantId = tenantId;
         this.name = name;
         this.lastName = lastName;

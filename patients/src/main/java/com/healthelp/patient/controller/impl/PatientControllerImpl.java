@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 
 public class PatientControllerImpl implements PatientController {
 
@@ -27,4 +29,11 @@ public class PatientControllerImpl implements PatientController {
     public ResponseEntity<Mono<Patient>> getPatientsById(String id) {
         return new ResponseEntity<>(patientService.getPatientsById(id),HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Flux<Patient>> getPatientsByNameAndUserId(String name, Integer userId) {
+        return new ResponseEntity<>(patientService.getPatientsByNameAndUserId(name,userId),HttpStatus.OK);
+    }
+
+
 }

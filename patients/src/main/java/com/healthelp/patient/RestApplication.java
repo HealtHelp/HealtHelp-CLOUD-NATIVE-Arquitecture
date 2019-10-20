@@ -37,10 +37,11 @@ public class RestApplication implements CommandLineRunner {
 		reactiveMongoTemplate.dropCollection("patient").subscribe();
 		UUID tenantId = UUID.randomUUID();
 		UUID userId = UUID.randomUUID();
-		Flux.just(new Patient(tenantId , "Maria", "Pizarro","71107899T","625589030","C/El Cid, 28", "Madrid","Abogada","mariaP@gmail.com",userId),
-				new Patient(tenantId , "Maria", "Perez","71457899T","625699030","C/El Mar, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",userId),
-				new Patient(tenantId , "Olga", "Honrubia","71433899J","625699030","C/Santa Ana, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",userId),
-				new Patient(tenantId , "Ruben", "Valle","71457229O","625699030","C/El Arbol, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",userId)
+		Flux.just(new Patient(1 , "Maria", "Pizarro","71107899T","625589030","C/El Cid, 28", "Madrid","Abogada","mariaP@gmail.com",1),
+				new Patient(1 , "Maria", "Perez","71457899T","625699030","C/El Mar, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",1),
+				new Patient(1 , "Olga", "Honrubia","71433899J","625699030","C/Santa Ana, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",1),
+				new Patient(1 , "Olga", "Cano","71433799J","625699034","C/Santa Ana, 28", "Madrid","olga@gmail.com","mariaP@gmail.com",1),
+				new Patient(1 , "Ruben", "Valle","71457229O","625699030","C/El Arbol, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",1)
 		).flatMap(item -> patientDao.save(item)).subscribe(item -> logg.info("Insert: "+item.toString()));
 	}
 }

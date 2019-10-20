@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 ;
 
 import java.time.Duration;
+import java.util.UUID;
 
 
 @Slf4j
@@ -31,5 +32,17 @@ public class PatientServiceImpl  implements PatientService {
     public Mono<Patient> getPatientsById(String id) {
         return  patientDao.findById(id).defaultIfEmpty(new Patient())
                 .doOnNext(item -> log.info(" -- GET /patients/{} ",id));
+    }
+
+    @Override
+    public Flux<Patient> getPatientsByNameAndUserId( String name, Integer userId) {
+        return patientDao.findAll().flatMap(item -> {
+            if( item.getName().equals(name) && item.getUserId().equals(userId)){
+                return Flux.just(item);
+            }
+            else{
+                return Flux.empty();
+            }
+        }).doOnNext(item -> log.info(" -- GET /patientByName {}",item.getName()));
     }
 }
