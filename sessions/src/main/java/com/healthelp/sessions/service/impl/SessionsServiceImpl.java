@@ -16,10 +16,11 @@ import java.time.Duration;
 public class SessionsServiceImpl implements SessionsService {
 
     private SessionsDao sessionsDao;
-
-
-    public SessionsServiceImpl(SessionsDao sessionsDao ) {
+    //private WebClient webClient = WebClient.create("http://localhost:8073");
+    private WebClient webClient;
+    public SessionsServiceImpl(SessionsDao sessionsDao,WebClient webClient ) {
         this.sessionsDao = sessionsDao;
+        this.webClient = webClient;
     }
 
     @Override
@@ -31,17 +32,13 @@ public class SessionsServiceImpl implements SessionsService {
     @Override
     public Flux<Sessions> getSessionsByPatientId(Integer patientId) {
 
-
-        WebClient webClient = WebClient.create("http://localhost:8073");
-
-        Flux<Patient> patientFlux = webClient.get()
-                                             .uri("/api/v1/patients")
-                                             .retrieve()
-                                             .bodyToFlux(Patient.class);
+        Flux<Patient> patientFlux = this.webClient.get()
+                                                  .uri("/api/v1/patients")
+                                                  .retrieve()
+                                                  .bodyToFlux(Patient.class);
 
 
         patientFlux.subscribe(item -> log.info(item.getName()));
-
 
           return sessionsDao.findAll().flatMap(item ->{
             if(patientId.equals(item.getPatientId())){

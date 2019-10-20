@@ -7,7 +7,11 @@ import com.healthelp.sessions.service.SessionsService;
 import com.healthelp.sessions.service.impl.SessionsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Collections;
 
 
 @Configuration
@@ -15,8 +19,20 @@ public class ApiConfig {
 
 
     @Bean
-    public SessionsService sessionsService(final SessionsDao sessionsDao ){
-        return new SessionsServiceImpl(sessionsDao);
+    public WebClient webClient(){
+       return WebClient
+                .builder()
+                .baseUrl("http://localhost:8073")
+                .defaultCookie("cookieKey", "cookieValue")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8073"))
+                .build();
+    }
+
+
+    @Bean
+    public SessionsService sessionsService(final SessionsDao sessionsDao,WebClient webClient){
+        return new SessionsServiceImpl(sessionsDao,webClient);
     }
 
     @Bean
