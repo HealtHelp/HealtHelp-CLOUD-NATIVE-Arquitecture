@@ -23,7 +23,7 @@ public class PatientServiceImpl  implements PatientService {
 
     @Override
     public Flux<Patient> getPatients() {
-        return patientDao.findAll().flatMap(Mono::just).delayElements(Duration.ofSeconds(3))
+        return patientDao.findAll()//.flatMap(Mono::just).delayElements(Duration.ofSeconds(3))
                 .doOnNext(item -> log.info(" -- GET /patients  name: {}",item.getName()));
 
     }

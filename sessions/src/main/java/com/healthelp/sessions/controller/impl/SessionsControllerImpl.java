@@ -19,4 +19,9 @@ public class SessionsControllerImpl implements SessionsController {
     public ResponseEntity<Flux<Sessions>> getSessions() {
         return new ResponseEntity<>(sessionsService.getSessions(), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Flux<Sessions>> getSessionsByPatientId(Integer patientId) {
+        return new ResponseEntity<>(sessionsService.getSessionsByPatientId(patientId),HttpStatus.OK);
+    }
 }

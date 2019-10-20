@@ -5,4 +5,6 @@ import reactor.core.publisher.Flux;
 
 public interface SessionsService {
     Flux<Sessions> getSessions();
+
+    Flux<Sessions> getSessionsByPatientId(Integer patientId);
 }
