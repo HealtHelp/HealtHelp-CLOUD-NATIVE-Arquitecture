@@ -43,6 +43,6 @@ public class PatientServiceImpl  implements PatientService {
             else{
                 return Flux.empty();
             }
-        }).doOnNext(item -> log.info(" -- GET /patientByName {}",item.getName()));
+        }).doOnNext(item -> log.info(" -- GET /patientByName {} {}",item.getName(),item.getLastName()));
     }
 }

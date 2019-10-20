@@ -35,8 +35,6 @@ public class RestApplication implements CommandLineRunner {
 
 
 		reactiveMongoTemplate.dropCollection("patient").subscribe();
-		UUID tenantId = UUID.randomUUID();
-		UUID userId = UUID.randomUUID();
 		Flux.just(new Patient(1 , "Maria", "Pizarro","71107899T","625589030","C/El Cid, 28", "Madrid","Abogada","mariaP@gmail.com",1),
 				new Patient(1 , "Maria", "Perez","71457899T","625699030","C/El Mar, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",1),
 				new Patient(1 , "Olga", "Honrubia","71433899J","625699030","C/Santa Ana, 28", "Madrid","mariaP@gmail.com","mariaP@gmail.com",1),
