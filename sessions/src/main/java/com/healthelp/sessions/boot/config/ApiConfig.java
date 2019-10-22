@@ -1,4 +1,4 @@
-package com.healthelp.sessions.boot;
+package com.healthelp.sessions.boot.config;
 
 import com.healthelp.sessions.controller.SessionsController;
 import com.healthelp.sessions.controller.impl.SessionsControllerImpl;
@@ -23,7 +23,7 @@ public class ApiConfig {
        return WebClient
                 .builder()
                 .baseUrl("http://localhost:8073")
-                .defaultCookie("cookieKey", "cookieValue")
+                .defaultCookie("server.port", "8073")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8073"))
                 .build();

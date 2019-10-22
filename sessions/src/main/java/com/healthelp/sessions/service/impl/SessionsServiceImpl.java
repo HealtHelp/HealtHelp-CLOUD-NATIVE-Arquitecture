@@ -1,3 +1,4 @@
+
 package com.healthelp.sessions.service.impl;
 
 import com.healthelp.sessions.dao.SessionsDao;
@@ -26,7 +27,7 @@ public class SessionsServiceImpl implements SessionsService {
     @Override
     public Flux<Sessions> getSessions() {
         return sessionsDao.findAll().flatMap(Mono::just).delayElements(Duration.ofSeconds(1))
-                .doOnNext(item -> SessionsServiceImpl.log.info(" -- GET /sessions  name: {}",item.getId()));
+                .doOnNext(item -> SessionsServiceImpl.log.info(" -- GET /sessions  id: {}",item.getPatientId()));
     }
 
     @Override
@@ -47,8 +48,7 @@ public class SessionsServiceImpl implements SessionsService {
             else{
                 return Flux.empty();
             }
-        }).doOnNext(item -> SessionsServiceImpl.log.info(" -- GET /sessions  patientId: {}",item.getPatientId()));
+        }).defaultIfEmpty(new Sessions()).doOnNext(item -> SessionsServiceImpl.log.info(" -- GET /sessions  patientId: {}",item.getPatientId()));
     }
-
-
 }
+

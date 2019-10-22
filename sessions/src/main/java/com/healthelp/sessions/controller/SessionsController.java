@@ -3,10 +3,7 @@ package com.healthelp.sessions.controller;
 import com.healthelp.sessions.model.Sessions;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
 @RestController
@@ -18,6 +15,11 @@ public interface SessionsController {
 
     @GetMapping(path = "/sessions/patientId",produces = {MediaType.APPLICATION_JSON_VALUE})
     ResponseEntity<Flux<Sessions>> getSessionsByPatientId(@RequestParam("patientId") Integer patientId);
+
+
+
+
+
 
 }
 

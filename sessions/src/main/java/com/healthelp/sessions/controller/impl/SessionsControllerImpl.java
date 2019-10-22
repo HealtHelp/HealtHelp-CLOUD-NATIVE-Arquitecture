@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 
+
+
 public class SessionsControllerImpl implements SessionsController {
 
     private SessionsService sessionsService;
@@ -24,4 +26,6 @@ public class SessionsControllerImpl implements SessionsController {
     public ResponseEntity<Flux<Sessions>> getSessionsByPatientId(Integer patientId) {
         return new ResponseEntity<>(sessionsService.getSessionsByPatientId(patientId),HttpStatus.OK);
     }
+
+
 }
