@@ -1,6 +1,5 @@
+package com.healthelp.patient.boot.timer;
 
-
-package com.healthelp.sessions.boot.timer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,8 +13,7 @@ import org.springframework.util.StopWatch;
 @Aspect
 @Component
 public class TimerExecution {
-
-    @Around("execution(* com.healthelp.sessions.controller..*(..)))")
+    @Around("execution(* com.healthelp.patient.controller..*(..)))")
     public Object profileAllMethods(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 
