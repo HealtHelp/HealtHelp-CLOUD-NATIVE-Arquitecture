@@ -4,15 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorMessages {
-    ERROR_GET_BILLINGS_BY_PATIENT_ID(204,"Ninguna facturación coincide con el id del paciente","GET /billings/");
+    ERROR_GET_BILLINGS_BY_PATIENT_ID(204,"Ninguna facturación coincide con el id del paciente");
 
     private Integer code;
     private String message;
-    private String url;
 
-     ErrorMessages(Integer code,String message,String url){
+
+     ErrorMessages(Integer code,String message){
         this.code = code;
         this.message = message;
-        this.url = url;
     }
 }

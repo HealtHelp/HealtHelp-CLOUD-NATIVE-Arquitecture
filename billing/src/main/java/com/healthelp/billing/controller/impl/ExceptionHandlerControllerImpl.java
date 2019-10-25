@@ -1,6 +1,5 @@
 package com.healthelp.billing.controller.impl;
 
-import com.healthelp.billing.controller.ExceptionHandlerController;
 import com.healthelp.billing.model.ErrorMessages;
 import com.healthelp.billing.model.dto.HttpErrorDTO;
 import com.healthelp.billing.model.exceptions.HandleNotFoundByPatientId;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @ControllerAdvice
-public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandler implements ExceptionHandlerController {
+public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandler  {
 
     public static HttpServletRequest getCurrentRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
@@ -31,12 +30,12 @@ public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandl
         return servletRequest;
     }
 
-    @Override
+
     @ExceptionHandler(HandleNotFoundByPatientId.class)
-    public ResponseEntity<HttpErrorDTO> handleNotFoundByPatientId(Exception ex, HttpServletRequest request) {
-        request = getCurrentRequest();
-        log.error(" -- ERROR: Billing not found {} ",request.getMethod());
+    public ResponseEntity<HttpErrorDTO> handleNotFoundByPatientId(Exception ex) {
+        log.error(" -- ERROR: Billing not found {} {} {} ",getCurrentRequest().getMethod(),getCurrentRequest().getContextPath(),
+                 getCurrentRequest().getRequestURI());
         return BillingMapper.buildHttpErrorDTO(ErrorMessages.ERROR_GET_BILLINGS_BY_PATIENT_ID.getCode(),ex.getMessage(),
-                request.getServletPath(), ErrorMessages.ERROR_GET_BILLINGS_BY_PATIENT_ID.getMessage());
+                getCurrentRequest().getServletPath(), ErrorMessages.ERROR_GET_BILLINGS_BY_PATIENT_ID.getMessage());
     }
 }

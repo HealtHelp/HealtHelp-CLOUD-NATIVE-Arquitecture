@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-
+import java.time.Duration;
 
 
 @Slf4j
@@ -21,7 +21,7 @@ public class PatientServiceImpl  implements PatientService {
 
     @Override
     public Flux<Patient> getPatients() {
-        return patientDao.findAll()//.flatMap(Mono::just).delayElements(Duration.ofSeconds(3))
+        return patientDao.findAll().flatMap(Mono::just).delayElements(Duration.ofSeconds(1))
                 .doOnNext(item -> log.info(" -- GET /patients  name: {}",item.getName()));
 
     }
