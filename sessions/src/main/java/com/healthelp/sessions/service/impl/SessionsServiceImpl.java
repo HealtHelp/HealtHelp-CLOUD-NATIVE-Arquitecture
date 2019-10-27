@@ -26,7 +26,7 @@ public class SessionsServiceImpl implements SessionsService {
 
     @Override
     public Flux<Sessions> getSessions() {
-        return sessionsDao.findAll().flatMap(Mono::just)//.delayElements(Duration.ofSeconds(1))
+        return sessionsDao.findAll().flatMap(Mono::just).delayElements(Duration.ofSeconds(1))
                 .doOnNext(item -> SessionsServiceImpl.log.info(" -- GET /sessions  id: {}",item.getPatientId()));
     }
 
