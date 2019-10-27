@@ -22,10 +22,10 @@ public class ApiConfig {
     public WebClient webClient(){
        return WebClient
                 .builder()
-                .baseUrl("http://localhost:8073")
-                .defaultCookie("server.port", "8073")
+                .baseUrl("http://localhost:8090")
+                .defaultCookie("server.port", "8090")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8073"))
+                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8090"))
                 .build();
     }
 
