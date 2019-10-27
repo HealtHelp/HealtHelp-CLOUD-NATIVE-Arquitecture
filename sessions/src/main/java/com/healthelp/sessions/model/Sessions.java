@@ -6,9 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Setter
-@Getter
-@NoArgsConstructor
+@Builder
+@Data
 @Document("session")
 public class Sessions {
     @Id
@@ -22,6 +21,8 @@ public class Sessions {
     private String background;
     private String complementary;
 
+    public Sessions(){}
+
     public Sessions( Date date, int patientId, String diagnosis, String exploration, String treatment, String reason, String background, String complementary) {
         this.date = date;
         this.patientId = patientId;
@@ -32,4 +33,17 @@ public class Sessions {
         this.background = background;
         this.complementary = complementary;
     }
+
+    public Sessions(String id, Date date, int patientId, String diagnosis, String exploration, String treatment, String reason, String background, String complementary) {
+        this.id = id;
+        this.date = date;
+        this.patientId = patientId;
+        this.diagnosis = diagnosis;
+        this.exploration = exploration;
+        this.treatment = treatment;
+        this.reason = reason;
+        this.background = background;
+        this.complementary = complementary;
+    }
+
 }

@@ -30,8 +30,13 @@ public class SessionsServiceImpl implements SessionsService {
                 .doOnNext(item -> SessionsServiceImpl.log.info(" -- GET /sessions  id: {}",item.getPatientId()));
     }
 
+
     @Override
     public Flux<Sessions> getSessionsByPatientId(Integer patientId) {
+        boolean ok = false;
+        if(!ok){
+            throw new RuntimeException("\"No se pudo cagar\"");
+        }
 
         Flux<Patient> patientFlux = this.webClient.get()
                                                   .uri("/api/v1/patients")
