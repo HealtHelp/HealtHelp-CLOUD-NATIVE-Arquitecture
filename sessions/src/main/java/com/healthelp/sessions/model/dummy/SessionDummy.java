@@ -18,13 +18,13 @@ public class SessionDummy {
           Sessions.builder()
                   .date(new Date())
                   .patientId(patientId)
-                  .diagnosis("No return diagnosis")
-                  .exploration("No return exploration")
-                  .treatment("No return treatment")
-                  .reason("No return reason")
-                .background("No return background")
-                .complementary("No return complementary")
-                .build()
+                  .diagnosis("Hystrix No return diagnosis")
+                  .exploration("Hystrix No return exploration")
+                  .treatment("Hystrix No return treatment")
+                  .reason("Hystrix No return reason")
+                  .background("Hystrix No return background")
+                  .complementary("Hystrix No return complementary")
+                  .build()
         );
     }
 }
