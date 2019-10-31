@@ -2,10 +2,10 @@ package com.healthelp.users.model;
 
 import lombok.Builder;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+
 
 @Data
 @Builder
@@ -14,7 +14,7 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
@@ -33,4 +33,19 @@ public class User implements Serializable {
                joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"),
                uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","role_id"})})
     private List<Role> roleList;
+
+    public User(){
+
+    }
+
+    public User(Integer id,String username, String password, Integer tenantId, Integer profileId, String email, Boolean enabled, List<Role> roleList) {
+        this.id=id;
+        this.username = username;
+        this.password = password;
+        this.tenantId = tenantId;
+        this.profileId = profileId;
+        this.email = email;
+        this.enabled = enabled;
+        this.roleList = roleList;
+    }
 }
