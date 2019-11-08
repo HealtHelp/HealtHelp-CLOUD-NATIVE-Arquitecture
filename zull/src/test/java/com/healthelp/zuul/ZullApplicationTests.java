@@ -1,4 +1,4 @@
-package com.healthelp.zull;
+package com.healthelp.zuul;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

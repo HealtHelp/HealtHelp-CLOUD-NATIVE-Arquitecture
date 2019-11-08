@@ -1,17 +1,17 @@
-package com.healthelp.users.model;
+package com.healthelp.users.model.entity;
 
 import lombok.Builder;
 import lombok.Data;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
+
 
 
 @Data
 @Builder
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,8 +21,6 @@ public class User implements Serializable {
     private String password;
     @Column(name = "tenant_id")
     private Integer tenantId;
-    @Column(name = "profile_id")
-    private Integer profileId;
     @Column(name = "email")
     private String email;
     @Column(name = "enabled")
@@ -38,12 +36,11 @@ public class User implements Serializable {
 
     }
 
-    public User(Integer id,String username, String password, Integer tenantId, Integer profileId, String email, Boolean enabled, List<Role> roleList) {
+    public User(Integer id,String username, String password, Integer tenantId, String email, Boolean enabled, List<Role> roleList) {
         this.id=id;
         this.username = username;
         this.password = password;
         this.tenantId = tenantId;
-        this.profileId = profileId;
         this.email = email;
         this.enabled = enabled;
         this.roleList = roleList;

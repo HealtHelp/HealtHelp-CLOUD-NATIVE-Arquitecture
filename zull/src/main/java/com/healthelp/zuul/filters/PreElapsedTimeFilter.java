@@ -1,4 +1,4 @@
-package com.healthelp.zull.filters;
+package com.healthelp.zuul.filters;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Component
-public class PostElapsedTimeFilter extends ZuulFilter {
+public class PreElapsedTimeFilter extends ZuulFilter {
 
 
-    private static Logger log = LoggerFactory.getLogger(PostElapsedTimeFilter.class);
+    private static Logger log = LoggerFactory.getLogger(PreElapsedTimeFilter.class);
 
     @Override
     public String filterType() {
-        return "post";
+        return "pre";
     }
 
     @Override
@@ -36,12 +36,9 @@ public class PostElapsedTimeFilter extends ZuulFilter {
 
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest httpServletRequest = requestContext.getRequest();
-        log.info(" -- ZULL - PRO");
-        Long timeStart = (Long) httpServletRequest.getAttribute("timeStart");
-        Long timeEnd = System.currentTimeMillis();
-        Long elapsedTime = timeEnd-timeStart;
-        log.info(" -- ZULL - Elapsed Time sg: {} ",(elapsedTime).doubleValue()/1000.00);
-        log.info(" -- ZULL - Elapsed Time ms: {} ",(elapsedTime));
+        log.info(" -- ZULL - PRE {} Request routing to {}",httpServletRequest.getMethod(),httpServletRequest.getRequestURL().toString());
+        Long timeStart = System.currentTimeMillis();
+        httpServletRequest.setAttribute("timeStart",timeStart);
         return null;
     }
 }

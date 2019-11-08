@@ -1,7 +1,7 @@
 package com.healthelp.users.service.impl;
 
 import com.healthelp.users.dao.UserDao;
-import com.healthelp.users.model.User;
+import com.healthelp.users.model.entity.User;
 import com.healthelp.users.model.dto.UserDTO;
 import com.healthelp.users.model.map.UserMapper;
 import com.healthelp.users.service.UserService;

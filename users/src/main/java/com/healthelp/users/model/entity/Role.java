@@ -1,8 +1,7 @@
-package com.healthelp.users.model;
+package com.healthelp.users.model.entity;
 
 import lombok.Builder;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,4 +15,11 @@ public class Role implements Serializable {
     private Long id;
     @Column(name = "role")
     private String role;
+
+    public Role(Long id,String role) {
+        this.id = id;
+        this.role = role;
+    }
+
+    public Role(){}
 }

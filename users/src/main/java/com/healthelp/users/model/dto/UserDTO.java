@@ -1,6 +1,6 @@
 package com.healthelp.users.model.dto;
 
-import com.healthelp.users.model.Role;
+import com.healthelp.users.model.entity.Role;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +13,6 @@ public class UserDTO {
     private String username;
     private String password;
     private Integer tenantId;
-    private Integer profileId;
     private String email;
     private Boolean enabled;
     private List<Role> roleList;
