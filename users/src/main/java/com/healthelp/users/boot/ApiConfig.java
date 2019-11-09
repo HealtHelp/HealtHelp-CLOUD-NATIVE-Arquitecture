@@ -7,6 +7,8 @@ import com.healthelp.users.service.UserService;
 import com.healthelp.users.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.server.EntityLinks;
+
 
 @Configuration
 public class ApiConfig {
@@ -17,10 +19,9 @@ public class ApiConfig {
     }
 
     @Bean
-    public UserController userController(UserService userService){
-        return new UserControllerImpl(userService);
+    public UserController userController(UserService userService, EntityLinks entityLinks){
+        return new UserControllerImpl(userService, entityLinks);
     }
-
 
 
 
