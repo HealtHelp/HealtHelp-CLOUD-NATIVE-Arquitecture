@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService,UserSecurity {
 
     private Logger log = LoggerFactory.getLogger(UserService.class);
     private RestTemplate restTemplate;
@@ -30,9 +30,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String url = UriComponentsBuilder.fromUriString("http://localhost:8090/hhu/api/v1/users")
-                .queryParam("username",username).toUriString();
-        UserDTO userDTO =  restTemplate.getForObject(url, UserDTO.class);
+        UserDTO userDTO = findByUserName(username);
         if(userDTO == null){
             log.error(" -- User {} Not Found!!",username);
             throw new UsernameNotFoundException(" -- User Not Found!!");
@@ -43,5 +41,12 @@ public class UserService implements UserDetailsService {
 
         log.info("User authenticated {}",username);
         return new User(username,userDTO.getPassword(),true,true,true,true,authorities);
+    }
+
+    @Override
+    public UserDTO findByUserName(String username) {
+        String url = UriComponentsBuilder.fromUriString("http://localhost:8090/hhu/api/v1/users")
+                .queryParam("username",username).toUriString();
+        return  restTemplate.getForObject(url, UserDTO.class);
     }
 }
