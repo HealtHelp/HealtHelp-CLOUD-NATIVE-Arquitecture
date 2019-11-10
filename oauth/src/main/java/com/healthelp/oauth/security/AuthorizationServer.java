@@ -1,6 +1,7 @@
 package com.healthelp.oauth.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -18,7 +19,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import java.util.Arrays;
 import java.util.Objects;
 
-
+@RefreshScope
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
