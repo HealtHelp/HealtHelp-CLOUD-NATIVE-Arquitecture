@@ -3,6 +3,7 @@ package com.healthelp.users.service.impl;
 import com.healthelp.users.dao.UserDao;
 import com.healthelp.users.model.entity.User;
 import com.healthelp.users.model.dto.UserDTO;
+import com.healthelp.users.model.exceptions.HandleExceptionFindUserName;
 import com.healthelp.users.model.map.UserMapper;
 import com.healthelp.users.service.UserService;
 import org.slf4j.Logger;
@@ -21,7 +22,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findByUsername(String username) {
         log.info(username);
-        User user = userDao.findByUsername(username);
-        return UserMapper.mapUserToUserDTO(user);
+        User user;
+        try{
+            user = userDao.findByUsername(username);
+            return UserMapper.mapUserToUserDTO(user);
+        }catch (Exception ex){
+            log.error(" -- ERROR HEALTHELP {}",ex.getMessage());
+            throw new HandleExceptionFindUserName(ex);
+        }
     }
 }

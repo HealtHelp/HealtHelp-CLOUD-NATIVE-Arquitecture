@@ -30,6 +30,6 @@ public class BillingMapper {
                 .statusText(statusText)
                 .url(url)
                 .message(message)
-                .build(), HttpStatus.OK);
+                .build(), HttpStatus.NOT_FOUND);
     }
 }
