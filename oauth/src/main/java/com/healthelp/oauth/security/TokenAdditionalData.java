@@ -26,7 +26,6 @@ public class TokenAdditionalData implements TokenEnhancer,UserSecurity {
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        System.out.println(authentication);
         Map<String,Object> info = new HashMap<>();
         UserDTO userDTO = userSecurity.findByUserName(authentication.getName());
         info.put("username",userDTO.getUsername());
