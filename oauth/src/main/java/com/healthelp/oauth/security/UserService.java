@@ -45,8 +45,7 @@ public class UserService implements UserDetailsService,UserSecurity {
 
     @Override
     public UserDTO findByUserName(String username) {
-        String url = UriComponentsBuilder.fromUriString("http://localhost:8090/hhu/api/v1/users")
-                .queryParam("username",username).toUriString();
+        String url = UriComponentsBuilder.fromUriString("http://localhost:8090/hhu/api/v1/users").queryParam("username",username).toUriString();
         return  restTemplate.getForObject(url, UserDTO.class);
     }
 }

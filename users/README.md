@@ -1,3 +1,3 @@
-HAL BROWSER
+HAL EXPLORER
 
-http://localhost:8090/hhu/browser/index.html#/
+http://localhost:8002/explorer/index.html

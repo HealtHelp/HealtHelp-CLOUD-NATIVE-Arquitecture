@@ -28,8 +28,8 @@ public class ApiConfig {
     }
 
     @Bean
-    public UserController userController(UserService userService, EntityLinks entityLinks, Properties properties, Environment environment){
-        return new UserControllerImpl(userService, entityLinks, properties,environment);
+    public UserController userController(UserService userService, EntityLinks entityLinks){
+        return new UserControllerImpl(userService, entityLinks);
     }
 
 

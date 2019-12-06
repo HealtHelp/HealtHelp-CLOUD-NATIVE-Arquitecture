@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findByUsername(String username) {
-        log.info(username);
         User user;
         try{
             user = userDao.findByUsername(username);

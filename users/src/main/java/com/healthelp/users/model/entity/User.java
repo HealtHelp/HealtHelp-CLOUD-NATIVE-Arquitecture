@@ -26,6 +26,7 @@ public class User  {
     @Column(name = "enabled")
     private Boolean enabled;
     @Column(name = "roles")
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
                joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"),
