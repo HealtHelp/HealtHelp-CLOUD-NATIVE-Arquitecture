@@ -1,0 +1,6 @@
+a{
+    font-family:Georgia,serif;
+}
+a:link {color:aqua;}
+a:visited {color:cornflowerblue;}
+a:hover {text-decoration:none;color:cadetblue;font-weight:bold;}

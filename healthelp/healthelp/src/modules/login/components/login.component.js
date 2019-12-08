@@ -38,9 +38,14 @@ function FormDialog() {
   }
 
   const handleActionLogin = (data) =>{
-    let json = {
+  /*   let json = {
       username: username,
       password: password,
+      grant_type: 'password'
+    }; */
+    let json = {
+      username: 'admin',
+      password: '12345',
       grant_type: 'password'
     };
       store.dispatch(handleLogin(json));

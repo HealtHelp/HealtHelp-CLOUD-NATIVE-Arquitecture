@@ -5,6 +5,7 @@ import FormDialogLogin from './modules/login/components/login.component';
 import SUCCESS from './modules/snackbar/success';
 import ERROR from './modules/snackbar/error';
 import Home from './modules/home/components/home.component';
+import Users from './modules/users/components/users.component';
 
 class App extends React.Component {
   constructor(props){
@@ -19,12 +20,17 @@ class App extends React.Component {
   });
   }
 
+ handleUserComponent = () => {
+   console.log("users")
+ }
+
   render(){
     return (
       <Router>
       <div className="App">
         <Route exact path="/" component={FormDialogLogin}/>
         <Route exact path="/home" component={Home}/>
+        <Route exact path="/users" component={Users}/>
       </div>
       {this.state.login.access_token?<SUCCESS></SUCCESS>:''}
       {this.state.login.access_token? <Redirect to="/home" />:''}
