@@ -24,6 +24,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 import java.util.Objects;
 
+
 @RefreshScope
 @Configuration
 @EnableResourceServer
@@ -40,7 +41,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/hho/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/hho/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/hhu/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/hhb/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
@@ -64,7 +65,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig =  new CorsConfiguration();
-        corsConfig.addAllowedOrigin("http://localhost:3000"); //Front End HealtHelp React + Redux
+        corsConfig.addAllowedOrigin("*"); //Front End HealtHelp React + Redux
         corsConfig.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS"));
         corsConfig.setAllowCredentials(true);
         corsConfig.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
@@ -73,8 +74,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         return source;
     }
 
-
-    @Bean
+   @Bean
     public FilterRegistrationBean<CorsFilter> corsFilter(){
         FilterRegistrationBean<CorsFilter>  filter = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource())) ;
         filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
