@@ -12,6 +12,7 @@ export const handleLogin = (data) =>  dispatch => {
        fetch(URL_LOGIN,request)
         .then((res) => {
           res.json().then((res) =>{
+            localStorage.setItem("token",res.access_token)
             return dispatch({
               type:SET_HANDLE_LOGIN,
               payload:res

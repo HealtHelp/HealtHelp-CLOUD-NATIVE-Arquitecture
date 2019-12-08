@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { FormControl,InputLabel,Input,FormHelperText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles(theme => ({
     button: {
       margin: theme.spacing(1),
@@ -21,12 +22,9 @@ const useStyles = makeStyles(theme => ({
 function FormDialog() {
   const [open, setOpen] = React.useState(true);
   let [username,password] = React.useState('');
+
   const classes = useStyles();
    
-  /* const handleClickOpen = () => {
-    setOpen(true);
-  }; */
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -45,7 +43,7 @@ function FormDialog() {
       password: password,
       grant_type: 'password'
     };
-    store.dispatch(handleLogin(json));
+      store.dispatch(handleLogin(json));
   }
 
   return (
