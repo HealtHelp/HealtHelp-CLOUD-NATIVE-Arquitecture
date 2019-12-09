@@ -1,0 +1,11 @@
+.item-form-users{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 2rem;
+}
+
+#item-icon{
+    margin: 1rem;
+}
