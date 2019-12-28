@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserMapper {
 
@@ -32,4 +34,9 @@ public class UserMapper {
                 .date(date.toString())
                 .build(), HttpStatus.NOT_FOUND);
     }
+
+    public static List<UserDTO> mapListUserToListUserDTO(List<User> usersList) {
+        return usersList.stream().map(UserMapper::mapUserToUserDTO).collect(Collectors.toList());
+    }
+
 }

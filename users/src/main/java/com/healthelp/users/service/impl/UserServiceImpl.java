@@ -4,10 +4,17 @@ import com.healthelp.users.dao.UserDao;
 import com.healthelp.users.model.entity.User;
 import com.healthelp.users.model.dto.UserDTO;
 import com.healthelp.users.model.exceptions.HandleExceptionFindUserName;
+import com.healthelp.users.model.exceptions.HandleExceptionGetUsers;
 import com.healthelp.users.model.map.UserMapper;
 import com.healthelp.users.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
@@ -29,5 +36,23 @@ public class UserServiceImpl implements UserService {
             log.error(" -- ERROR HEALTHELP {}",ex.getMessage());
             throw new HandleExceptionFindUserName(ex);
         }
+    }
+
+    @Override
+    public List<UserDTO> getUsers(Pageable pageable) {
+        pageable = pageRequest(pageable);
+        List<User> users;
+        try{
+           users = userDao.findAll(pageable).stream().collect(Collectors.toList());
+        }catch (Exception ex){
+            log.error(" -- ERROR HEALTHELP {}",ex.getMessage());
+            throw new HandleExceptionGetUsers(ex);
+        }
+        return UserMapper.mapListUserToListUserDTO(users);
+    }
+
+    private PageRequest pageRequest(Pageable pageable){
+        Sort sort = pageable.getSort();
+        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
     }
 }

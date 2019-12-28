@@ -2,6 +2,8 @@ package com.healthelp.users.service.dummy;
 
 import com.healthelp.users.model.entity.Role;
 import com.healthelp.users.model.entity.User;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,5 +26,9 @@ public class UserServiceDummy {
                 new Role(1L,"ADMIN"),
                 new Role(2L,"USER")
         );
+    }
+
+    public static PageRequest pageRequestDummy(){
+        return  PageRequest.of(0, 5, Sort.Direction.DESC, "username");
     }
 }

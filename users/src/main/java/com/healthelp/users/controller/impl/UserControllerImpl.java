@@ -6,10 +6,14 @@ import com.healthelp.users.model.entity.User;
 import com.healthelp.users.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 import java.util.Objects;
 
 
@@ -34,4 +38,11 @@ public class UserControllerImpl implements UserController {
         user.add(entityLinks.linkToItemResource(User.class, Objects.requireNonNull(user.getContent()).getId()));
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> getUsers(Pageable pageable) {
+        return new ResponseEntity<>(userService.getUsers(pageable),HttpStatus.OK);
+    }
+
+
 }

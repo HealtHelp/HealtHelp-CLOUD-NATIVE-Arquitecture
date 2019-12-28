@@ -3,6 +3,7 @@ package com.healthelp.users.controller.impl;
 import com.healthelp.users.model.ErrorMessages;
 import com.healthelp.users.model.dto.HttpErrorDTO;
 import com.healthelp.users.model.exceptions.HandleExceptionFindUserName;
+import com.healthelp.users.model.exceptions.HandleExceptionGetUsers;
 import com.healthelp.users.model.map.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,14 @@ public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandl
                 getCurrentRequest().getRequestURI());
         return UserMapper.buildHttpErrorDTO(ErrorMessages.ERROR_GET_FIND_BY_USERNAME.getCode(), HttpStatus.NOT_FOUND,
                 getCurrentRequest().getServletPath(), ErrorMessages.ERROR_GET_FIND_BY_USERNAME.getMessage(),getCurrentRequest().getMethod(),new Date());
+    }
+
+    @ExceptionHandler(HandleExceptionGetUsers.class)
+    public ResponseEntity<HttpErrorDTO> handleExceptionGetUsers(Exception ex){
+        log.error(" -- ERROR HEALTHELP: Users not found {} {} {} ",getCurrentRequest().getMethod(),getCurrentRequest().getContextPath(),
+                getCurrentRequest().getRequestURI());
+        return UserMapper.buildHttpErrorDTO(ErrorMessages.ERROR_GET_USERS.getCode(),HttpStatus.FORBIDDEN,
+                getCurrentRequest().getServletPath(),ErrorMessages.ERROR_GET_USERS.getMessage(),getCurrentRequest().getMethod(),new Date());
     }
 }
 
