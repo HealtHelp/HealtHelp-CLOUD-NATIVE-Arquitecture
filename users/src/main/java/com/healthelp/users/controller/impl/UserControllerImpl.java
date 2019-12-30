@@ -7,7 +7,6 @@ import com.healthelp.users.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.HttpStatus;
@@ -41,6 +40,7 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity<List<UserDTO>> getUsers(Pageable pageable) {
+        log.info(" -- GET /users");
         return new ResponseEntity<>(userService.getUsers(pageable),HttpStatus.OK);
     }
 

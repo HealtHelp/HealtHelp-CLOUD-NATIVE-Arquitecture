@@ -31,6 +31,7 @@ public class TokenAdditionalData implements TokenEnhancer,UserSecurity {
         info.put("username",userDTO.getUsername());
         info.put("email",userDTO.getEmail());
         info.put("tenantId",userDTO.getTenantId());
+        info.put("role",userDTO.getRoleList().get(0).getRole());
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }

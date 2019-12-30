@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import store from './store/store';
 import {BrowserRouter as Router,Route,Redirect} from 'react-router-dom';
 import FormDialogLogin from './modules/login/components/login.component';
@@ -7,24 +8,15 @@ import ERROR from './modules/snackbar/error';
 import Home from './modules/home/components/home.component';
 import Users from './modules/users/components/users.component';
 
-class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-        login:{}
-    }
-  store.subscribe(() => {
-    this.setState({
-      login : store.getState().auth.oauth
-    });
-  });
+
+const App = () => {
+  const login = useSelector((state) => state.auth.oauth)
+  let error;
+  let token;
+  if(login){
+    error = login.error;
+    token = login.access_token;
   }
-
- handleUserComponent = () => {
-   console.log("users")
- }
-
-  render(){
     return (
       <Router>
       <div className="App">
@@ -32,13 +24,13 @@ class App extends React.Component {
         <Route exact path="/home" component={Home}/>
         <Route exact path="/users" component={Users}/>
       </div>
-      {this.state.login.access_token?<SUCCESS></SUCCESS>:''}
-      {this.state.login.access_token? <Redirect to="/home" />:''}
-      {this.state.login.error?<ERROR></ERROR>:''}
+      {token?<SUCCESS></SUCCESS> :''}
+      {token? <Redirect to="/home" />:''}
+      {error?<ERROR></ERROR>:''}
       {window.onload=<Redirect to="/"/>}
       </Router>
     );
   }
-}
 
+ 
 export default App;

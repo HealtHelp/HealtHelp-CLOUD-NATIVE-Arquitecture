@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -31,7 +32,7 @@ export default function TemporaryDrawer() {
     setState({ ...state, [side]: open });
   };
 
-
+  const role = useSelector((state) => state.auth.oauth.role)
 
   const sideList = side => (
     <div
@@ -41,13 +42,14 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-          
+      {role === 'ROLE_ADMIN'?   
       <Link to="/users">
           <ListItem>
             <ListItemIcon><PeopleAltIcon/></ListItemIcon>
             <ListItemText primary={'Users'} />
           </ListItem>
-      </Link>  
+      </Link> 
+      :''}  
       </List>
       <Divider />
      

@@ -15,7 +15,6 @@ const  HEADERS = {
 export const handleGETUsers = () =>  dispatch => {
     axios.get(URL_GET_USERS,HEADERS)
     .then((res) => {
-       console.log(res);
         return dispatch ({
             type:GET_USERS,
             payload:res.data

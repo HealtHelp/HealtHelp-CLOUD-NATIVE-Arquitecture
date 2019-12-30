@@ -66,7 +66,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig =  new CorsConfiguration();
-        corsConfig.addAllowedOrigin("*"); //Front End HealtHelp React + Redux
+        corsConfig.addAllowedOrigin("*");
         corsConfig.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS"));
         corsConfig.setAllowCredentials(true);
         corsConfig.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
