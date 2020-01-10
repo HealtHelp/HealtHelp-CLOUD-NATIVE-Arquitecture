@@ -33,7 +33,7 @@ export default function AlertDialog() {
   };
   const classes = useStyles();
   return (
-    <div>
+    
       <Dialog
         open={open}
         onClose={handleClose}
@@ -85,6 +85,6 @@ export default function AlertDialog() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+   
   );
 }

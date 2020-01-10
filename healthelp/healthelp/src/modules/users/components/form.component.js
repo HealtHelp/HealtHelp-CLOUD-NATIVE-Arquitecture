@@ -22,15 +22,14 @@ const SimpleContainer = () => {
   }
   return (
      <div>
-   
       <CssBaseline />
       <Container maxWidth="sm">
         <Typography component="div" style={{ backgroundColor: '#cfe8fc' }} />
-        <form className="item-form-users">
+        <div className="item-form-users">
         <SaveIcon id="item-icon" onClick={handleDialog}></SaveIcon>
         <EditIcon id="item-icon"></EditIcon>
         <DeleteIcon id="item-icon"></DeleteIcon>
-        </form>
+        </div>
       </Container>
    
     {open?<Dialog></Dialog>:''}
