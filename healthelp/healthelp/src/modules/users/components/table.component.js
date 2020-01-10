@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -14,7 +15,8 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles1 = makeStyles(theme => ({
     marginLeft: theme.spacing(2.5),
   },
 }));
+
 
 function TablePaginationActions(props) {
   const classes = useStyles1();
@@ -100,10 +103,6 @@ const useStyles2 = makeStyles(theme => ({
 }));
 
 
-function handleForm(value){
-}
-
-
 export default function CustomPaginationActionsTable() {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
@@ -130,12 +129,20 @@ export default function CustomPaginationActionsTable() {
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
               <TableRow key={row.id}>  
-                <TableCell align="left"><input type="checkbox" onClick={handleForm()}></input></TableCell> 
-                <TableCell component="th" scope="row">
+                <TableCell align="center" component="th" scope="row">
                   {row.username}
                 </TableCell>
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="left">{row.roleList[0].role}</TableCell>
+                <TableCell align="center">
+                <Link to={`users/${row.id}`}
+                      >
+                  <EditIcon id="item-icon"></EditIcon>      
+                </Link>
+                </TableCell>
+                <TableCell align="left">
+                   <DeleteIcon id="item-icon"></DeleteIcon>
+                </TableCell>
               </TableRow>
             ))}
 

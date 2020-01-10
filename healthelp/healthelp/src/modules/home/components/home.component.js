@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -32,7 +33,12 @@ export default function TemporaryDrawer() {
     setState({ ...state, [side]: open });
   };
 
+  
   const role = useSelector((state) => state.auth.oauth.role)
+
+  if(role == undefined){
+    role = '';
+  }
 
   const sideList = side => (
     <div
@@ -62,7 +68,6 @@ export default function TemporaryDrawer() {
       <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
         {sideList('left')}
       </Drawer>
-     
     </div>
   );
 }
