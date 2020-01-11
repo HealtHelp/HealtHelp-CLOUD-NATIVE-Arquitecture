@@ -5,4 +5,4 @@ npm i react-draggable
 
 ## sweetalert 2 
 
-UpdateUser
+npm i sweetalert2

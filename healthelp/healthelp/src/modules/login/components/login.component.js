@@ -52,14 +52,14 @@ function FormDialog() {
   }
 
   return (
-    <div>
+   
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title"><i className="fas fa-laptop-medical"></i>&nbsp;HEALTHELP&nbsp;</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Inserta tus credenciales
           </DialogContentText>
-          <form>
+         
           <FormControl>
             <InputLabel htmlFor="item-user">Usuario</InputLabel>
             <Input id="item-user" aria-describedby="my-helper-text" onChange={handleUser} />
@@ -70,7 +70,7 @@ function FormDialog() {
             <Input type="password" id="my-input" aria-describedby="my-helper-text" onChange={handlePassword}/>
             <FormHelperText id="my-helper-text">We'll never share your password.</FormHelperText>
         </FormControl>
-        </form>
+       
         </DialogContent>
         <DialogActions>
         <Button
@@ -83,7 +83,7 @@ function FormDialog() {
         </Button> 
         </DialogActions>
       </Dialog>
-    </div>
+    
   );
 }
 

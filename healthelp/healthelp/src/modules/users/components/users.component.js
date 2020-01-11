@@ -16,7 +16,6 @@ const Users = () => {
             <div>
                 <Header></Header>
                 <Table></Table>
-                <Form></Form>
             </div>
         );
 }
