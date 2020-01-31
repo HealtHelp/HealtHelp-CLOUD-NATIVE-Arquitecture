@@ -1,6 +1,7 @@
 package com.healthelp.users.service;
 
 import com.healthelp.users.model.dto.UserDTO;
+import com.healthelp.users.model.entity.User;
 import com.healthelp.users.service.dummy.UserServiceDummy;
 import com.healthelp.users.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -37,4 +38,12 @@ public class UserServiceTestImpl {
         List<UserDTO> userDTOS1 =  userServiceImpl.getUsers(pageable);
         assert (userDTOS.size()==userDTOS1.size());
     }
+
+    /*@Test
+    void saveUser(User user){
+        UserDTO userDTO = userService.saveUser(user);
+        given(userService.saveUser(any())).willReturn(userDTO);
+        UserDTO userDTO1 = userServiceImpl.saveUser(user);
+        assert (userDTO.getId() != userDTO1.getId());
+    }*/
 }

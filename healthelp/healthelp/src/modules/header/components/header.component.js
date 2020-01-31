@@ -32,13 +32,7 @@ const handleStyles = () => {
         <div className={classes.root}>
           <AppBar position="static">
             <Toolbar>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <Link to={`/`}>
-                <Fab color="primary" aria-label="add">
-                  <AddIcon />
-                </Fab> 
-              </Link>
-              </IconButton>
+            
               <Typography variant="h6" className={classes.title}>
                 HealtHelp Organization
               </Typography>

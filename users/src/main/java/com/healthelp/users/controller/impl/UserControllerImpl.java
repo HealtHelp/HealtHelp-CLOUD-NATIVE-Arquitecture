@@ -3,11 +3,13 @@ package com.healthelp.users.controller.impl;
 import com.healthelp.users.controller.UserController;
 import com.healthelp.users.model.dto.UserDTO;
 import com.healthelp.users.model.entity.User;
+import com.healthelp.users.model.exceptions.HandleExceptionSaveUsers;
 import com.healthelp.users.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Links;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,15 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity<List<UserDTO>> getUsers(Pageable pageable) {
         log.info(" -- GET /users");
         return new ResponseEntity<>(userService.getUsers(pageable),HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<EntityModel<Links>> insertCourse(User user) throws HandleExceptionSaveUsers {
+        log.info(" -- POST /course");
+        EntityModel<UserDTO> entity = new EntityModel<>(userService.saveUser(user));
+        entity.add(entityLinks.linkToItemResource(User.class, Objects.requireNonNull(user.getId())));
+        Links links = entity.getLinks();
+        return new ResponseEntity(links,HttpStatus.OK);
     }
 
 

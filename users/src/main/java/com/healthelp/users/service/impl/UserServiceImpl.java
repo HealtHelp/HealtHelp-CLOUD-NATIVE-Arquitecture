@@ -5,13 +5,17 @@ import com.healthelp.users.model.entity.User;
 import com.healthelp.users.model.dto.UserDTO;
 import com.healthelp.users.model.exceptions.HandleExceptionFindUserName;
 import com.healthelp.users.model.exceptions.HandleExceptionGetUsers;
+import com.healthelp.users.model.exceptions.HandleExceptionSaveUsers;
 import com.healthelp.users.model.map.UserMapper;
 import com.healthelp.users.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,9 +25,11 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl .class);
     private UserDao userDao;
+    private BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao,BCryptPasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -49,6 +55,18 @@ public class UserServiceImpl implements UserService {
             throw new HandleExceptionGetUsers(ex);
         }
         return UserMapper.mapListUserToListUserDTO(users);
+    }
+
+    @Override
+    public UserDTO saveUser(User user) throws HandleExceptionSaveUsers {
+        try{
+            String password = passwordEncoder.encode(user.getPassword());
+            user.setPassword(password);
+            return UserMapper.mapUserToUserDTO(userDao.save(user));
+        }catch (Exception ex){
+            log.error(" -- ERROR HEALTHELP {}",ex.getMessage());
+            throw new HandleExceptionSaveUsers(ex);
+        }
     }
 
     private PageRequest pageRequest(Pageable pageable){

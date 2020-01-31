@@ -25,12 +25,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(true);
-
-
-
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("handleSUbmit")
+  } 
+
   const classes = useStyles();
   return (
     
@@ -76,6 +79,7 @@ export default function AlertDialog() {
         color="primary"
         size="large"
         className={classes.button}
+        onClick={handleSubmit}
         startIcon={<SaveIcon />}
       >
         Save

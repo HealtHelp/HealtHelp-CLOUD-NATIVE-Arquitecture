@@ -1,14 +1,10 @@
 package com.healthelp.oauth.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+
 
 import java.util.List;
 
-@Getter
-@Data
-@Builder
+
 public class UserDTO {
     private Integer id;
     private String username;
@@ -27,5 +23,33 @@ public class UserDTO {
         this.email = email;
         this.enabled = enabled;
         this.roleList = roleList;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Integer getTenantId() {
+        return tenantId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
     }
 }

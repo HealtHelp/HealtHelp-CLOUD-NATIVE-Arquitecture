@@ -36,7 +36,7 @@ export default function TemporaryDrawer() {
   
   const role = useSelector((state) => state.auth.oauth.role)
 
-  if(role == undefined){
+  if(role === undefined){
     role = '';
   }
 

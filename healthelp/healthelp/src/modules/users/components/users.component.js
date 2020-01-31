@@ -1,5 +1,5 @@
 import React , {useEffect}from 'react';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Header from '../../header/components/header.component';
 import Table from './table.component';
 import {handleGETUsers} from '../actions/user.actions';
@@ -16,6 +16,7 @@ const Users = () => {
             <div>
                 <Header></Header>
                 <Table></Table>
+                <Form></Form>
             </div>
         );
 }

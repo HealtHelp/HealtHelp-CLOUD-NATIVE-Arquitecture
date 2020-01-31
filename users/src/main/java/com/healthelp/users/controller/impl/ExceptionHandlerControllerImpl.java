@@ -4,6 +4,7 @@ import com.healthelp.users.model.ErrorMessages;
 import com.healthelp.users.model.dto.HttpErrorDTO;
 import com.healthelp.users.model.exceptions.HandleExceptionFindUserName;
 import com.healthelp.users.model.exceptions.HandleExceptionGetUsers;
+import com.healthelp.users.model.exceptions.HandleExceptionSaveUsers;
 import com.healthelp.users.model.map.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,14 @@ public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandl
                 getCurrentRequest().getRequestURI());
         return UserMapper.buildHttpErrorDTO(ErrorMessages.ERROR_GET_USERS.getCode(),HttpStatus.FORBIDDEN,
                 getCurrentRequest().getServletPath(),ErrorMessages.ERROR_GET_USERS.getMessage(),getCurrentRequest().getMethod(),new Date());
+    }
+
+    @ExceptionHandler(HandleExceptionSaveUsers.class)
+    public ResponseEntity<HttpErrorDTO> handleExceptionSaveUser(Exception ex){
+        log.error(" -- ERROR HEALTHELP: Error save User {} {} {} ",getCurrentRequest().getMethod(),getCurrentRequest().getContextPath(),
+                getCurrentRequest().getRequestURI());
+        return UserMapper.buildHttpErrorDTO(ErrorMessages.ERROR_POST_SAVE_USER.getCode(),HttpStatus.INTERNAL_SERVER_ERROR,
+                getCurrentRequest().getServletPath(),ErrorMessages.ERROR_POST_SAVE_USER.getMessage(),getCurrentRequest().getMethod(),new Date());
     }
 }
 
