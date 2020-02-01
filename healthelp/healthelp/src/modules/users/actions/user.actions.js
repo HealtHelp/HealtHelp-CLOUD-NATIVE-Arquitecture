@@ -1,5 +1,10 @@
-import { GET_USERS } from '../types/user.types';
-import { URL_GET_USERS } from '../../constants/constants';
+import { 
+    GET_USERS,
+    SET_USER } from '../types/user.types';
+import { 
+    URL_GET_USERS,
+    URL_SET_USER } from '../../constants/constants';
+
   
 import axios from 'axios';
 
@@ -21,5 +26,17 @@ export const handleGETUsers = () =>  dispatch => {
        }) 
     })
     .catch(error => console.log(error))      
+}
+
+export const handlePOSTUser = () => dispatch => {
+    axios.post(URL_SET_USER.HEADERS)
+    .then((res) => {
+        console.log(res)
+        return dispatch ({
+            type:SET_USER,
+            payload:res.data
+       }) 
+    })
+    .catch(error => console.log(error)) 
 }
 

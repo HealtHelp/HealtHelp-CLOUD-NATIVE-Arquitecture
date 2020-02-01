@@ -11,3 +11,4 @@ export const HEADERS = {
 export const URL_LOGIN = 'http://localhost:3000/hho/oauth/token';
 //Users
 export const URL_GET_USERS = 'http://localhost:3000/hhu/api/v1/users?page=0&size=10&sort=username'
+export const URL_SET_USER = 'http://localhost:3000/hhu/api/v1/users'

@@ -30,7 +30,6 @@ const SimpleContainer = () => {
          </Fab>
         </div>
       </Container>
-   
     {open?<Dialog></Dialog>:''}
     </div>
   );
