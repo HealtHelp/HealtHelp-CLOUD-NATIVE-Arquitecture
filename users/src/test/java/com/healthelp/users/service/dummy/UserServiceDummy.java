@@ -16,7 +16,7 @@ public class UserServiceDummy {
                 .email("bladidb@gmail.com")
                 .tenantId(1)
                 .enabled(true)
-                .password("$2a$10$9IZmZcS9Npz8MUSBS.KLguHOQJsS0jr6SqHKHysmQ4LypYKtjQ5w.")
+                .password("12345")
                 .roleList(dummyRoles())
                 .build();
     }

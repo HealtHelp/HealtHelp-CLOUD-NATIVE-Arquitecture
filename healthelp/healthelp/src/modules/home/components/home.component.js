@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -33,11 +33,10 @@ export default function TemporaryDrawer() {
     setState({ ...state, [side]: open });
   };
 
-  
-  const role = useSelector((state) => state.auth.oauth.role)
-
-  if(role === undefined){
-    role = '';
+  const rol = useSelector((state) => state.auth.oauth)
+  let role;
+  if(rol){
+    role = rol.role;
   }
 
   const sideList = side => (
@@ -52,10 +51,12 @@ export default function TemporaryDrawer() {
       <Link to="/users">
           <ListItem>
             <ListItemIcon><PeopleAltIcon/></ListItemIcon>
-            <ListItemText primary={'Users'} />
+            <ListItemText primary={'Users'} /> 
           </ListItem>
       </Link> 
-      :''}  
+      : <Link to="/">exit
+      </Link>}
+       
       </List>
       <Divider />
      
@@ -63,10 +64,11 @@ export default function TemporaryDrawer() {
   );
 
 
+
   return (
     <div>
       <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-        {sideList('left')}
+        {sideList('left')} 
       </Drawer>
     </div>
   );

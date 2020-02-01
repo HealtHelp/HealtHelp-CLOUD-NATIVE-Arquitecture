@@ -2,13 +2,16 @@ package com.healthelp.users.service;
 
 import com.healthelp.users.model.dto.UserDTO;
 import com.healthelp.users.model.entity.User;
+import com.healthelp.users.model.exceptions.HandleExceptionSaveUsers;
 import com.healthelp.users.service.dummy.UserServiceDummy;
 import com.healthelp.users.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ import static org.mockito.BDDMockito.given;
 public class UserServiceTestImpl {
     private UserService userService = Mockito.mock(UserService.class);
     private UserServiceImpl userServiceImpl = Mockito.mock(UserServiceImpl.class);
+
 
     @Test
     void findByUsernameTestEmpty(){
@@ -39,11 +43,12 @@ public class UserServiceTestImpl {
         assert (userDTOS.size()==userDTOS1.size());
     }
 
-    /*@Test
-    void saveUser(User user){
+    @Test
+    void saveUserAll() throws HandleExceptionSaveUsers {
+        User user = UserServiceDummy.userDummy();
         UserDTO userDTO = userService.saveUser(user);
         given(userService.saveUser(any())).willReturn(userDTO);
         UserDTO userDTO1 = userServiceImpl.saveUser(user);
-        assert (userDTO.getId() != userDTO1.getId());
-    }*/
+        assert (userDTO==null||userDTO1==null);
+    }
 }

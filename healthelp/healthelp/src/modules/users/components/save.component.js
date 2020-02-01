@@ -13,6 +13,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import SaveIcon from '@material-ui/icons/Save';
+import Swal from 'sweetalert2';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,7 +32,38 @@ export default function AlertDialog() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSUbmit")
+    setOpen(false)
+    console.log("handleSUbmit ")
+    var validator = require("email-validator");
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    if(!validator.validate(email)){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      })
+    }
+    else{
+      Swal.fire({
+        title: `¿Guardar al usuario ${username}?`,
+        text: ``,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+    }
   } 
 
   const classes = useStyles();
@@ -47,8 +79,8 @@ export default function AlertDialog() {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
           <form className={classes.root} noValidate autoComplete="off">
-            <TextField id="standard-basic" label="Username" />
-            <TextField id="standard-basic" label="Email" />
+            <TextField id="username" label="Username" />
+            <TextField id="email" label="Email" />
             <TextField
                id="standard-password-input"
                label="Password"

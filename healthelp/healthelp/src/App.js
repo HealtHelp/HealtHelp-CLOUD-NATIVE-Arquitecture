@@ -28,7 +28,7 @@ const App = () => {
       {token?<SUCCESS></SUCCESS> :''}
       {token? <Redirect to="/home" />:''}
       {error?<ERROR></ERROR>:''}
-      {window.onload=<Redirect to="/"/>}
+      {window.onload?<Redirect to="/"/>:''}
       </Router>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -107,8 +107,12 @@ export default function CustomPaginationActionsTable() {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const dataAll = useSelector((state) => state.users.data)
-  const tenantId = useSelector((state) => state.auth.oauth.tenantId)
+  const dataAll = useSelector((state) => state.users.data);
+  const tenant = useSelector((state) => state.auth.oauth);
+  let tenantId;
+  if(tenant){
+    tenantId = tenant.tenantId;
+  }
   const data = dataAll.filter(item => item.tenantId === tenantId)
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
   function handleChangePage(event, newPage) {
